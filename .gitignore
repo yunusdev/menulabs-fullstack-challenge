@@ -2,6 +2,7 @@
 .vscode/*
 !.vscode/extensions.json
 .idea
+scripts/
 *.suo
 *.ntvs*
 *.njsproj
