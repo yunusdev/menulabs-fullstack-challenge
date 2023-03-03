@@ -2,6 +2,7 @@
 
 
 namespace App\Services;
+use App\Http\Resources\WeatherResource;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
@@ -28,12 +29,14 @@ class OpenWeatherApiService
             ->json();
 
         return [
-            'location' => $response['name'],
+            'city' => $response['name'] ?? null,
             'temperature' => $response['main']['temp'] - 273.15,
             'pressure' => $response['main']['pressure'],
-            'country' => $response['sys']['country'],
+            'country' => $response['sys']['country'] ?? null,
             'timestamp' => $response['dt'],
-            'weather' => $response['weather'][0],
+            'icon' => $response['weather'][0]['icon'],
+            'main' => $response['weather'][0]['main'],
+            'description' => $response['weather'][0]['description'],
         ];
     }
 

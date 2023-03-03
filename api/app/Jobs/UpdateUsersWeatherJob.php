@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\User;
+use App\Models\Weather;
 use App\Services\OpenWeatherApiService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -20,11 +21,6 @@ class UpdateUsersWeatherJob implements ShouldQueue
      */
     public function __construct()
     {
-        //
-
-
-
-
     }
 
     /**
@@ -34,18 +30,20 @@ class UpdateUsersWeatherJob implements ShouldQueue
     {
         $users = User::all();
 
-        $lat = 6.4541;
-        $lng = 3.3947;
+        foreach ($users as $user)
+        {
+            $weatherApi = new OpenWeatherApiService(
+                config('services.open_weather.base_url'),
+                config('services.open_weather.api_key'),
+                $user->latitude,
+                $user->longitude,
+            );
 
-        $weatherApi = new OpenWeatherApiService(
-            config('services.open_weather.base_url'),
-            config('services.open_weather.api_key'),
-            $lat,
-            $lng,
-        );
+            $weatherData = $weatherApi->getWeather();
+            info(json_encode($weatherData));
 
-        info("Here >>>>> ");
-        info($weatherApi->getWeather());
+            Weather::query()->updateOrCreate(['user_id' => $user->id], $weatherData);
+        }
 
     }
 }
