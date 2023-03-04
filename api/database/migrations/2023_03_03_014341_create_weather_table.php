@@ -18,12 +18,9 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->float('temperature');
             $table->float('pressure');
-            $table->string('country')->nullable();
-            $table->unsignedBigInteger('timestamp');
             $table->string('icon');
             $table->string('main');
             $table->string('description');
-
             $table->timestamps();
 
             $table->foreign('user_id')

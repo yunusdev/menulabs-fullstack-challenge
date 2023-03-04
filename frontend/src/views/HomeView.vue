@@ -5,4 +5,8 @@ import UserWeathers from "@/components/UserWeathers.vue";
 
 <template>
   <UserWeathers/>
+
+  <div class="absolute">
+    <router-view />
+  </div>
 </template>

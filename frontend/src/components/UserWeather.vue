@@ -1,19 +1,34 @@
-<script>
+<script lang="ts">
 import WeatherIcon from "@/components/WeatherIcon.vue";
+import {defineComponent} from "vue";
+import router from "@/router";
+import type {User} from "@/stores/user";
 
-export default {
+export default defineComponent({
   components: {WeatherIcon},
   props: {
     user: {
-      type: Object,
+      type: Object as () => User,
       required: true,
     }
+  },
+
+  setup({user}){
+
+    const openUserWeather = (userId: number) => {
+      router.push({name: "UserWeatherView", params: {id: userId}})
+    }
+
+    return {
+      openUserWeather
+    }
+
   }
-}
+})
 </script>
 
 <template>
-  <section class="flex items-center cursor-pointer w-full px-5 pt-1 pb-4 border border-1 border-light rounded-lg hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500">
+  <section @click="openUserWeather(user.id)" class="flex items-center cursor-pointer w-full px-5 pt-1 pb-4 border border-1 border-light rounded-lg hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500">
     <div class="flex flex-col gap-y-1 w-1/2">
       <h3 class="text-lighter text-sm">{{user.name}}</h3>
       <h1 class="text-4xl">{{user.weather.city}}</h1>

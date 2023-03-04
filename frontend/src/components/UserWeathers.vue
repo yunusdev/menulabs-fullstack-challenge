@@ -1,8 +1,10 @@
 <script lang="ts">
 import { computed, defineComponent, watch, onMounted, ref } from "vue";
 import UserWeather from "@/components/UserWeather.vue";
-import { useUserStore } from "@/stores/user";
+import {useUserStore} from "@/stores/user";
 import Pagination from "@/components/Pagination.vue";
+import type {User} from "@/stores/user";
+
 export default defineComponent({
   components: {Pagination, UserWeather},
   setup(){
@@ -11,7 +13,7 @@ export default defineComponent({
       store.fetchUsers();
     });
 
-    const users = computed(() => {
+    const users = computed<User[]>(() => {
       return store.users;
     });
 
@@ -19,7 +21,7 @@ export default defineComponent({
       return store.pagination;
     });
 
-    const update_pagination = (page: number) => {
+    const updatePagination = (page: number) => {
       console.log({page})
       store.fetchUsers(page);
     }
@@ -27,7 +29,7 @@ export default defineComponent({
     return {
       users,
       pagination,
-      update_pagination,
+      updatePagination,
     }
   }
 })
@@ -36,6 +38,6 @@ export default defineComponent({
 <template>
   <main v-if="pagination && users.length > 0" class="flex flex-col text-silver justify-center items-center gap-y-4 max-w-3xl w-full  mt-20 ">
     <UserWeather :user="user" v-for="user, key in users" :key="key"/>
-    <Pagination :pagination="pagination" @paginate="update_pagination"/>
+    <Pagination :pagination="pagination" @paginate="updatePagination"/>
   </main>
 </template>
