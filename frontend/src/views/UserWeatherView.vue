@@ -56,24 +56,24 @@ export default defineComponent({
             <h6 class="text-lighter  text-xs capitalize">{{ user.weather.description }}</h6>
           </div>
 
-          <h2 class="flex text-7xl font-bold mb-10">{{ user.weather.temperature }} <span class="px-1 text-lighter text-2xl">° </span> C</h2>
+          <h2 class="flex text-7xl font-bold mb-7">{{ user.weather.temperature }} <span class="px-1 text-lighter text-2xl">° </span> C</h2>
 
           <div class="flex flex-col w-full gap-y-3 mt-10">
             <div class="flex justify-between items-center">
               <h4>Feels Like</h4>
-              <h5 class="text-lighter">Celcius</h5>
+              <h5 class="text-lighter">{{ user.weather.feels_like }}</h5>
             </div>
             <div class="flex justify-between items-center">
               <h4>Humidity</h4>
-              <h5 class="text-lighter">m/s</h5>
+              <h5 class="text-lighter">{{ user.weather.humidity }}</h5>
             </div>
             <div class="flex justify-between items-center">
               <h4>Wind speed</h4>
-              <h5 class="text-lighter">open.weather.gov</h5>
+              <h5 class="text-lighter">{{ user.weather.wind_speed }}</h5>
             </div>
             <div class="flex justify-between items-center">
               <h4>Wind degree</h4>
-              <h5 class="text-lighter">open.weather.gov</h5>
+              <h5 class="text-lighter">{{ user.weather.wind_degree }}</h5>
             </div>
           </div>
         </div>

@@ -20,6 +20,10 @@ class WeatherResource extends JsonResource
             'icon' => $this->icon,
             'main' => $this->main,
             'description' => $this->description,
+            'wind_speed' => round($this->wind_speed, 2) . ' MPH',
+            'wind_degree' => round($this->wind_speed) . '°',
+            'humidity' => round($this->humidity) . '%',
+            'feels_like' => round($this->feels_like) . '°C',
         ];
     }
 }

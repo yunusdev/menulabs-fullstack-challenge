@@ -20,6 +20,10 @@ class Weather extends Model
         'icon',
         'main',
         'description',
+        'wind_speed',
+        'wind_degree',
+        'humidity',
+        'feels_like',
     ];
 
     public function user(): BelongsTo

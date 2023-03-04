@@ -30,6 +30,10 @@ class UpdateUsersWeatherJob implements ShouldQueue
     {
         $users = User::all();
 
+        $weathers = Weather::query()->count();
+
+        info($weathers);
+
         foreach ($users as $user)
         {
             $weatherApi = new OpenWeatherApiService(
@@ -41,6 +45,7 @@ class UpdateUsersWeatherJob implements ShouldQueue
 
             $weatherData = $weatherApi->getWeather();
             info(json_encode($weatherData));
+//            return;
 
             Weather::query()->updateOrCreate(['user_id' => $user->id], $weatherData);
         }

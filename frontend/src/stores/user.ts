@@ -10,6 +10,10 @@ interface Weather {
   icon: string
   main: string
   description: string
+  wind_speed: string
+  wind_degree: string
+  humidity: string
+  feels_like: string
 }
 
 export interface User {

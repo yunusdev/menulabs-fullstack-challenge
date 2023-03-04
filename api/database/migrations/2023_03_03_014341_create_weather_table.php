@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('icon');
             $table->string('main');
             $table->string('description');
+            $table->float('wind_speed')->nullable();
+            $table->float('wind_degree')->nullable();
+            $table->float('humidity')->nullable();
+            $table->float('feels_like')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
