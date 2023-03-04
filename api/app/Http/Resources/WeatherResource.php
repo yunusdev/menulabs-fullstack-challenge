@@ -6,19 +6,20 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class WeatherResource extends JsonResource
 {
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
     public function toArray($request): array
     {
-        info($this->resource);
-
         return [
-            'location' => $this->resource['name'],
-            'temperature' => $this->resource['main']['temp'] - 273.15,
-            'pressure' => $this->resource['main']['pressure'],
-            'country' => $this->resource['sys']['country'],
-            'timestamp' => $this->resource['dt'],
-            'icon' => $this->resource['weather'][0],
-            'main' => $this->resource['weather'][0]['main'],
-            'description' => $this->resource['weather'][0]['description'],
+            'city' => $this->city,
+            'temperature' => round($this->temperature),
+            'pressure' => round($this->pressure),
+            'icon' => $this->icon,
+            'main' => $this->main,
+            'description' => $this->description,
         ];
     }
 }
